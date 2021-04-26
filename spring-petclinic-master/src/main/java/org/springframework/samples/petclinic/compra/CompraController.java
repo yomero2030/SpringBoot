@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.OwnerRepository;
 import org.springframework.samples.petclinic.product.Product;
@@ -25,9 +26,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
@@ -55,6 +58,7 @@ public class CompraController {
     
     public  CompraController(CompraRepository compra){
         this.compra = compra;
+        this.product = product;
     
     }
     
@@ -151,16 +155,14 @@ public class CompraController {
     }
     
     
+ @GetMapping("/productSell")
+    public String initFindForm(Map<String, Object> model) {
+        Collection<Product> allProducts = this.product.getAllProducts();
+        model.put("allProducts", allProducts);
+        //porque no usaron la variable de VIEW_PRODUCT_HOME en el return? -Claudio
+        return "compra/productSell";
+    }  
     
     
-    
-    
-    
-    
-    /*@RequestMapping("/url")
-    public String page(Model model) {
-        model.addAttribute("attribute", "value");
-        return "view.name";
-    }*/
     
 }

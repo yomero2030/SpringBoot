@@ -38,7 +38,6 @@ public class Compra extends BaseEntity{
     private String description;
 
     @Column(name = "price")
-    @NotNull
     @Positive
     private Double price;
     
@@ -46,6 +45,8 @@ public class Compra extends BaseEntity{
     @NotNull
     private String formaPago;
     
+    @Column(name = "total")
+    private Integer total;
     
     @Column(name = "fecha")
     @NotNull
@@ -65,6 +66,7 @@ public class Compra extends BaseEntity{
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+    
     
 
      public String getFecha(){
@@ -106,6 +108,8 @@ public class Compra extends BaseEntity{
     public void setFormaPago(String formapago){
         this.formaPago = formaPago;
     }
+    
+    
     
     
     @Override
